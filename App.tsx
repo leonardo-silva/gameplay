@@ -7,8 +7,7 @@ import { Rajdhani_500Medium, Rajdhani_700Bold } from "@expo-google-fonts/rajdhan
 import AppLoading from "expo-app-loading";
 
 // My screens and components
-import { SignIn } from "./src/screens/SignIn";
-import { Home } from "./src/screens/Home";
+import { Routes } from "./src/routes";
 import { Background } from "./src/components/Background";
 
 export default function App() {
@@ -31,7 +30,7 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
-      <Home />
+      <Routes />
     </Background>  
   );
 }
