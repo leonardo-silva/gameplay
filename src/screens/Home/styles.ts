@@ -12,5 +12,8 @@ export const styles = StyleSheet.create({
         justifyContent: 'space-between',
         marginTop: getStatusBarHeight() + 26,  // In Android getStatusBarHeight() has no effect
         marginBottom: 42
+    },
+    content: {
+        marginTop: 42
     }
 });
