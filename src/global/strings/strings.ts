@@ -1,5 +1,13 @@
 export const strings = {
-    // AppointmentDetails 
+    // Appointment screens
+    appointmentCreateButtonText: 'Agendar',
+    appointmentCreateHeaderTitle: 'Agendar partida',
+    appointmentCreateListTitle: 'Categoria',
+    appointmentCreateSelectBodyText: 'Selecione um servidor',
+    appointmentCreateFieldDate: 'Dia e mês',
+    appointmentCreateFieldTime: 'Hora e minuto',
+    appointmentCreateLabelDescription: 'Descrição',
+    appointmentCreateLabelMaxLength: 'Max 100 caracteres',
     appointmentDetailsHeaderTitle: 'Detalhes',
     appointmentDetailsTitle: 'Lendários',
     appointmentDetailsSubTitle: 'É hoje que vamos chegar ao challenger sem perder uma partida da md10',
