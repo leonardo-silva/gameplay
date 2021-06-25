@@ -21,8 +21,8 @@ export function Member({ data }: Props) {
     const { on, primary } = theme.colors;
 
     const { 
-        MemberStatusAvailable,
-        MemberStatusBusy } = strings;
+        memberStatusAvailable: MemberStatusAvailable,
+        memberStatusBusy: MemberStatusBusy } = strings;
 
     const isOnline = data.status === 'online';
 

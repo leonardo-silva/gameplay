@@ -15,6 +15,9 @@ export const strings = {
     appointmentDetailsListSubtitle: 'Total 3',
     appointmentDetailsButtonText: 'Entrar na partida',
     // Member
-    MemberStatusAvailable: 'Disponível',
-    MemberStatusBusy: 'Ocupado',
+    memberStatusAvailable: 'Disponível',
+    memberStatusBusy: 'Ocupado',
+    // Guild
+    guildAdm: 'Administrador',
+    guildGuest: 'Convidado'
 }
