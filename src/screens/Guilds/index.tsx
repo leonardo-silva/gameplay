@@ -17,7 +17,13 @@ export function Guilds({ handleGuildSelected }: Props) {
             name: 'Lendários',
             icon: 'image.png',
             owner: true
-        }    
+        },    
+        {
+            id: '2',
+            name: 'Galera do Game',
+            icon: 'image.png',
+            owner: true
+        }   
     ];
 
     return (
