@@ -20,10 +20,16 @@ export function Guilds({ handleGuildSelected }: Props) {
         },    
         {
             id: '2',
-            name: 'Galera do Game',
+            name: 'Lendários',
             icon: 'image.png',
             owner: true
-        }   
+        },    
+        {
+            id: '3',
+            name: 'Lendários',
+            icon: 'image.png',
+            owner: true
+        }
     ];
 
     return (
@@ -37,8 +43,12 @@ export function Guilds({ handleGuildSelected }: Props) {
                         onPress={() => handleGuildSelected(item)}
                     />                   
                 )}
-                ItemSeparatorComponent={() => <ListDivider />}
+                // this property ( contentContainerStyle={{ paddingBottom: 68 }} ) makes sure there is a 
+                // space between the last item and the bottom of the cell phone. 
+                contentContainerStyle={{ paddingBottom: 68, paddingTop: 103 }}
+                ItemSeparatorComponent={() => <ListDivider isCentered />}
                 showsVerticalScrollIndicator={false}
+                ListHeaderComponent={() => <ListDivider isCentered />}
                 style={styles.guilds}
             />
         </View>

@@ -68,27 +68,28 @@ export function Home() {
                 setCategory={handleCategorySelect}
             />
 
-            <View style={styles.content}>
-                <ListHeader 
-                    title="Partidas agendadas:"
-                    subtitle="Total 6"
-                />
+            <ListHeader 
+                title="Partidas agendadas:"
+                subtitle="Total 6"
+            />
 
-                <FlatList
-                    data={appointments}
-                    keyExtractor={item => item.id}
-                    renderItem={({ item }) => (
-                            <Appointment 
-                                data={item}
-                                onPress={handleAppointmentDetails}
-                            />
-                        )
-                    }
-                    ItemSeparatorComponent={() => <ListDivider />}
-                    style={styles.matches}
-                    showsVerticalScrollIndicator={false}
-                />
-            </View>
+            <FlatList
+                data={appointments}
+                keyExtractor={item => item.id}
+                renderItem={({ item }) => (
+                        <Appointment 
+                            data={item}
+                            onPress={handleAppointmentDetails}
+                        />
+                    )
+                }
+                // this property ( contentContainerStyle={{ paddingBottom: 69 }} ) makes sure there is a 
+                // space between the last item and the bottom of the cell phone. 
+                contentContainerStyle={{ paddingBottom: 69 }}
+                ItemSeparatorComponent={() => <ListDivider />}
+                style={styles.matches}
+                showsVerticalScrollIndicator={false}
+            />       
         </Background>
     );
 }

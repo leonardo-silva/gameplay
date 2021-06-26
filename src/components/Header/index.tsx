@@ -10,7 +10,7 @@ import { styles } from "./styles";
 
 type Props = {
     title: string;
-    action?: ReactNode;
+    action?: ReactNode;  
 }
 
 export function Header({title, action}: Props) {
@@ -39,12 +39,16 @@ export function Header({title, action}: Props) {
                 { title }
             </Text>
 
-            {
-                action &&
-                <View>
-                    { action }
+            {/* If there is an action, show it, otherwise, just put some space in its place */}
+            { 
+                action ? 
+                <View> 
+                    { action } 
                 </View>
+                : 
+                <View style={ { width: 24 } }/>
             }
+
         </LinearGradient>
     )    
 }
