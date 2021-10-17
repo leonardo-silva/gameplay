@@ -1,21 +1,28 @@
 import React from "react";
-import { View, Text, Image } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { View, Text, Image, Alert } from "react-native";
+//import { useNavigation } from "@react-navigation/native";
 
 import { ButtonIcon } from "../../components/ButtonIcon";
 import { Background } from "../../components/Background";
+
 import { useAuth } from "../../hooks/auth";
 
 import IllustrationImg from '../../assets/illustration.png';
 import { styles } from './styles';
 
 export function SignIn() {
-    const navigation = useNavigation();
-    const { user } = useAuth();
+    //const navigation = useNavigation();
+    const { user, signIn } = useAuth();
     //console.log(user);
 
-    function handleSignIn() {
-        navigation.navigate('Home');
+    async function handleSignIn() {
+        // Navigation was removed when OAuth2 authentication was implemented
+        //navigation.navigate('Home');
+        try {
+            await signIn();
+        } catch (error) {
+            Alert.alert(error as string);
+        }
     }
     
     return(

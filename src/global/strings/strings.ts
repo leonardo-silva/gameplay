@@ -19,5 +19,7 @@ export const strings = {
     memberStatusBusy: 'Ocupado',
     // Guild
     guildAdm: 'Administrador',
-    guildGuest: 'Convidado'
+    guildGuest: 'Convidado',
+    // Authentication
+    authError: 'Não foi possível autenticar'
 }
