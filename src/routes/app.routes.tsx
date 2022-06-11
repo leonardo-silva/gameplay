@@ -10,7 +10,7 @@ import { theme } from "../global/styles/theme";
 const { Navigator, Screen } = createStackNavigator();
 
 // It defines the screens available (routes) to navigate to
-export function AuthRoutes() {
+export function AppRoutes() {
     return(
         <Navigator
             headerMode="none"
