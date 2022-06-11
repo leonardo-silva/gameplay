@@ -3,7 +3,8 @@ import React,
     createContext,
     useContext,
     useState,
-    ReactNode 
+    ReactNode, 
+    useEffect
 } from "react";
 
 import * as AuthSession from 'expo-auth-session';
@@ -17,6 +18,8 @@ const { RESPONSE_TYPE } = process.env;
 import { api } from "../services/api";
 
 import { strings } from '../global/strings/strings';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { COLLECTION_USERS } from "../configs/database";
 
 type User = {
     id: string;
@@ -65,7 +68,6 @@ function AuthProvider({ children }: AuthProviderProps) {
         try {
             setLoading(true);
 
-            //const authUrl = 'https://discord.com/api/oauth2/authorize?client_id=858841667041624069&redirect_uri=https%3A%2F%2Fauth.expo.io%2Fgameplay&response_type=code&scope=guilds%20connections%20email%20identify'
             // 'Crase' to embed formulas 
             const authUrl = `${api.defaults.baseURL}/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`
             //console.log(authUrl);
@@ -85,11 +87,14 @@ function AuthProvider({ children }: AuthProviderProps) {
                 userInfo.data.avatar = `${CDN_IMAGE}/avatars/${userInfo.data.id}/${userInfo.data.avatar}.png`;
 
                 // We set first name, token, and the rest (see type User) come from ...userInfo.data
-                setUser({
+                const userData = {
                     ...userInfo.data,
                     firstName,
                     token: params.access_token
-                });
+                }
+
+                await AsyncStorage.setItem(COLLECTION_USERS, JSON.stringify(userData));
+                setUser(userData);
             }
         } catch {
             throw new Error(strings.authError);
@@ -97,6 +102,21 @@ function AuthProvider({ children }: AuthProviderProps) {
             setLoading(false);
         }
     }
+
+    async function loadUserStorageData() {
+        const storage = await AsyncStorage.getItem(COLLECTION_USERS);
+
+        if (storage) {
+            const loggedUser = JSON.parse(storage) as User;
+            api.defaults.headers.authorization = `Bearer ${loggedUser.token}`;
+
+            setUser(loggedUser);
+        }
+    }
+
+    useEffect(() => {
+        loadUserStorageData();
+    }, []);
 
     return (
         <AuthContext.Provider value={{
