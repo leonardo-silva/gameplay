@@ -53,8 +53,8 @@ export function Home() {
         categoryId === category ? setCategory('') : setCategory(categoryId);
     }
 
-    function handleAppointmentDetails() {
-        navigation.navigate('AppointmentDetails');
+    function handleAppointmentDetails(selectedGuild: AppointmentProps) {
+        navigation.navigate('AppointmentDetails', { selectedGuild });
     }
 
     function handleAppointmentCreate() {
@@ -70,6 +70,8 @@ export function Home() {
         } else {
             setAppointments(storage);
         }
+
+        // await AsyncStorage.removeItem(COLLECTION_APPOINTMENTS);
 
         setLoading(false);
     }
@@ -96,7 +98,7 @@ export function Home() {
                 <>
                     <ListHeader 
                         title="Partidas agendadas:"
-                        subtitle="Total 6"
+                        subtitle={`Total ${appointments.length}`}
                     />
 
                     <FlatList
@@ -105,7 +107,7 @@ export function Home() {
                         renderItem={({ item }) => (
                                 <Appointment 
                                     data={item}
-                                    onPress={handleAppointmentDetails}
+                                    onPress={() => handleAppointmentDetails(item)}
                                 />
                             )
                         }
