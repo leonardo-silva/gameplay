@@ -4,7 +4,8 @@ import {
     View, 
     Platform,
     ScrollView, 
-    KeyboardAvoidingView // To avoid keyboard in front of component when user is typing
+    KeyboardAvoidingView, // To avoid keyboard in front of component when user is typing
+    Alert
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { RectButton } from "react-native-gesture-handler";
@@ -62,23 +63,27 @@ export function AppointmentCreate() {
     }
 
     async function handleSave() {
-        const newAppointment = {
-            id: uuid.v4(),
-            guild,
-            category,
-            date: `${day}/${month} às ${hour}:${minute}h`,
-            description
+        if (category) {
+            const newAppointment = {
+                id: uuid.v4(),
+                guild,
+                category,
+                date: `${day}/${month} às ${hour}:${minute}h`,
+                description
+            }
+    
+            const storage = await AsyncStorage.getItem(COLLECTION_APPOINTMENTS);
+            const appointments = storage ? JSON.parse(storage) : [];
+    
+            await AsyncStorage.setItem(
+                COLLECTION_APPOINTMENTS, 
+                JSON.stringify([...appointments, newAppointment])
+            );
+    
+            navigation.navigate('Home');
+        } else {
+            Alert.alert('Faltou selecionar a categoria!');
         }
-
-        const storage = await AsyncStorage.getItem(COLLECTION_APPOINTMENTS);
-        const appointments = storage ? JSON.parse(storage) : [];
-
-        await AsyncStorage.setItem(
-            COLLECTION_APPOINTMENTS, 
-            JSON.stringify([...appointments, newAppointment])
-        );
-
-        navigation.navigate('Home');
     }
 
     return (
